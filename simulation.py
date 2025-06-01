@@ -191,7 +191,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def generate_report(self):
         fname = "uav_report.txt"
         try:
-            with open(fname, "w") as f:
+            with open(fname, "w", encoding="utf-8") as f:  # <-- encoding ekle!
                 f.write("UAV Connectivity Report\n")
                 f.write(f"Final λ₂: {self.swarm.last_lambda2:.4f}\n")
                 f.write(f"Steps: {len(self.swarm.time_series)}\n")
@@ -202,6 +202,7 @@ class MainWindow(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.information(self, "Report", f"Saved to {fname}")
         except Exception as e:
             QtWidgets.QMessageBox.critical(self, "Report Error", str(e))
+
 
 
 if __name__ == "__main__":
